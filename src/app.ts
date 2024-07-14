@@ -2,6 +2,9 @@ import express from "express";
 import { errorHandler } from "./middlewares/error-handler";
 import loggerMiddleware from "./middlewares/logger-handler";
 import bodyParser from "body-parser";
+import { bookRoute } from "./routes/book.route";
+import { authorRoute } from "./routes/author.route";
+import { categoryRoute } from "./routes/category.route";
 
 export const app = express();
 
@@ -12,6 +15,10 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(loggerMiddleware);
+//ROUTE
+app.use("/book", bookRoute);
+app.use("/author", authorRoute);
+app.use("/category", categoryRoute);
 
 // Global Error Handler
 app.use(errorHandler);
